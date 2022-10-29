@@ -135,11 +135,13 @@ public class PlayerController : MonoBehaviour
 
 
     // -------------------------------- ìñÇΩÇËîªíËÇÃä÷êî -------------------------------
-    private void OnTriggerEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall")
         {
             _isDeath = true;
         }
     }
+
 }
