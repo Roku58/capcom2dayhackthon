@@ -28,12 +28,12 @@ public class ObjectMove : MonoBehaviour
     void Start()
     {
         _impulseSource = GetComponent<CinemachineImpulseSource>();
-    }
-
-    void Update()
-    {
         _glitchFx = GameObject.Find("Main Camera").GetComponent<GlitchFx>();
         _glitchFx.Intensity = 0;
+    }
+
+    private void FixedUpdate()
+    {
         Move();
     }
 
@@ -44,7 +44,7 @@ public class ObjectMove : MonoBehaviour
     {
 
         Vector3 pos = transform.position;
-        pos.z -= 0.01f * _moveSpeed;
+        pos.z -= 0.01f * _moveSpeed * Time.deltaTime;
         transform.position = pos;
 
     }
