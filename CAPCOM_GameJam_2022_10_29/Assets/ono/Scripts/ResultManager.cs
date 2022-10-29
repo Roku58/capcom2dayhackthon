@@ -1,30 +1,34 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultManager : MonoBehaviour
 {
-    [SerializeField] private Text length_text;
+    [SerializeField] private Text length_text, lv_text;
 
     public List<GameObject> not_opens = new List<GameObject>();
     public List<GameObject> opens = new List<GameObject>();
 
     private float length = 200;
+    private int lv = 1;
+
     [SerializeField] int split = 100;
 
     public void Awake()
     {
         length_text = GameObject.Find("Area_Num_Text").GetComponent<Text>();
+        lv_text = GameObject.Find("Lv_Num_Text").GetComponent<Text>();
     }
 
     public void Start()
     {
         SetList();
         CheckLength();
+        SetText();
     }
 
-    //q—v‘f‚Ìæ“¾‚ÆƒŠƒXƒg‚ÉŠi”[
+    //å­è¦ç´ ã®å–å¾—ã¨ãƒªã‚¹ãƒˆã«æ ¼ç´
     void SetList()
     {
         GameObject ParentObject;
@@ -44,10 +48,10 @@ public class ResultManager : MonoBehaviour
         }
     }
 
-    //’·‚³‚É‰‚¶‚Ä‰‰o
+    //é•·ã•ã«å¿œã˜ã¦æ¼”å‡º
     void CheckLength()
     {
-        //ŠJ‘ñŒã‚Ì“y’n‚ğ‚·‚×‚Ä”ñ•\¦‚É‚·‚é
+        //é–‹æ‹“å¾Œã®åœŸåœ°ã‚’ã™ã¹ã¦éè¡¨ç¤ºã«ã™ã‚‹
         foreach (var open in opens)
         {
             open.SetActive(false);
@@ -60,5 +64,11 @@ public class ResultManager : MonoBehaviour
             opens[i].SetActive(true);
             not_opens[i].SetActive(false);
         }
+    }
+
+    public void SetText()
+    {
+        lv_text.text = lv.ToString();
+        length_text.text = length.ToString()+"mÂ²";
     }
 }
