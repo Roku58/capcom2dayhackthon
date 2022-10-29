@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -86,7 +87,6 @@ public class PlayerController : MonoBehaviour
         var posZ = mGameOverPos + mHp;
         transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
     }
-
     void UpdateMoveHorizontal() //　レーンの番号から移動する関数
     {
         // レーンの始点
@@ -102,7 +102,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
-
     void UpdateSpeed() // スピードと距離を加算する
     {
         // 速度を更新する
