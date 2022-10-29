@@ -115,7 +115,7 @@ void Start()
     {
         if (collision.gameObject.tag == "Wall")
         {
-            _isDeath = true;
+            //_isDeath = true;
         }
     }
 
