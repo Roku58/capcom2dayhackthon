@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject _player;
 
-
     void Start()
     {
         
@@ -17,6 +16,4 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
-
 }
