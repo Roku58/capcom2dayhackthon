@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     public int mCurrentLv { get; private set; } // 現在のレベル
     private int mHp = 0;
     private int mCurrentLane = 0; // 現在のレーン
-
+    private int mPreLane=0; // ひとつ前のレーン
+    private float mLaneThreshold = 0;// 線形補間の割合
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
     [SerializeField] private int mMaxExpAddition = 3; // レベルアップごとの経験値の上昇幅
     [SerializeField] private int mMaxHp = 3;    // 最大HP
-    
+    [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
 
 // Start is called before the first frame update
 void Start()
@@ -29,6 +30,7 @@ void Start()
         mCurrentLv = 1;
         mHp = mMaxHp; // 体力を初期化
         mCurrentLane = 0;
+        mLaneThreshold = 1.0f; // 補間終了状態にしておく
     }
 
     // Update is called once per frame
@@ -44,14 +46,20 @@ void Start()
     {
         // キーボードから入力を受け取る
         var inputX= Input.GetAxisRaw("Horizontal"); // 左右入力を取得する
-        if (inputX > 0.5f) // 右入力
+        if (mLaneThreshold >= 1.0f)　// 移動完了
         {
-            mCurrentLane++;
-
-        }
-        else if (inputX < -0.5f) // 左入力
-        {
-            mCurrentLane--;
+            if (Input.GetKeyDown(KeyCode.D)) // 右入力
+            {
+                mPreLane = mCurrentLane;
+                mCurrentLane++;
+                mLaneThreshold = 0.0f;
+            }
+            else if (Input.GetKeyDown(KeyCode.A)) // 左入力
+            {
+                mPreLane = mCurrentLane;
+                mCurrentLane--;
+                mLaneThreshold = 0.0f;
+            }
         }
         // 現在のレーンがレーンの最大値を超えたら矯正する
         mCurrentLane = Math.Clamp(mCurrentLane, 0, mMaxLaneCounts - 1);
@@ -62,7 +70,15 @@ void Start()
         // レーンの始点
         var minLanePoint = 1 + -(mMaxLaneCounts);
         var posX = minLanePoint + (mCurrentLane * LaneWidth);  // X座標を算出
-        transform.position = new Vector3(posX, mPosY, 0.0f);
+        // ひとつ前のレーン位置を算出
+        var prePosX = minLanePoint + (mPreLane * LaneWidth);  // X座標を算出
+
+        mLaneThreshold += Time.deltaTime * mHorizontalMoveSpeed;
+        mLaneThreshold = Math.Clamp(mLaneThreshold, 0.0f, 1.0f);
+        // 線形補間で移動
+        var pos=Vector3.Lerp(new Vector3(prePosX, mPosY, 0.0f), new Vector3(posX, mPosY, 0.0f), mLaneThreshold);
+
+        transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
 
     // ----------------------------- 外部から呼び出してもらう関数 ----------------------------
