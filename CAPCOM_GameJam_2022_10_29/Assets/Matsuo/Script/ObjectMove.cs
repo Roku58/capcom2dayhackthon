@@ -21,6 +21,8 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     int _damage;
 
+    [SerializeField]
+
     CinemachineImpulseSource _impulseSource = default;
 
     GlitchFx _glitchFx;
@@ -34,6 +36,11 @@ public class ObjectMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+    }
+
+    private void Update()
+    {
         Move();
     }
 
@@ -44,7 +51,7 @@ public class ObjectMove : MonoBehaviour
     {
 
         Vector3 pos = transform.position;
-        pos.z -= 0.01f * _moveSpeed * Time.deltaTime;
+        pos.z -= 1f * _moveSpeed * Time.deltaTime;
         transform.position = pos;
 
     }
