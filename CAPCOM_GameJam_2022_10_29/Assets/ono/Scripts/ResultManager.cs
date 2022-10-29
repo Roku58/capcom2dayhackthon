@@ -11,6 +11,8 @@ public class ResultManager : MonoBehaviour
     public List<GameObject> not_opens = new List<GameObject>();
     public List<GameObject> opens = new List<GameObject>();
 
+    GameObject TitleButton, ReStartButton;
+
     private float length = 850;
     private int lv = 1;
 
@@ -20,6 +22,8 @@ public class ResultManager : MonoBehaviour
     {
         length_text = GameObject.Find("Area_Num_Text").GetComponent<Text>();
         lv_text = GameObject.Find("Lv_Num_Text").GetComponent<Text>();
+        TitleButton = GameObject.Find("TitleButton"); TitleButton.SetActive(false);
+        ReStartButton = GameObject.Find("ReStartButton"); ReStartButton.SetActive(false);
     }
 
     public void Start()
@@ -68,12 +72,14 @@ public class ResultManager : MonoBehaviour
         }
     }
 
+    //テキストの設定
     public void SetText()
     {
         lv_text.text = lv.ToString();
         length_text.text = "0m²";
     }
 
+    //アニメーション
     public void Animation()
     {
         float pos = -40.0f;
@@ -83,7 +89,11 @@ public class ResultManager : MonoBehaviour
         pos += num * 5.0f + 10.0f;
 
         Camera.main.transform.position = new Vector3(-50.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
-        Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), 2.0f).SetDelay(1.0f);
+        Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), 2.0f).SetDelay(1.0f).OnComplete(() =>
+        {
+            ReStartButton.SetActive(true);
+            TitleButton.SetActive(true);
+        }); ;
 
         DOVirtual.Float(0f, length, 2.0f, value =>
         {

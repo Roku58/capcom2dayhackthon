@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         _isGameEnd = _player.gameObject.GetComponent<PlayerController>()._isDeath;
 
         mGameSeconds += Time.deltaTime; // タイマーを加算
-        if(_isGameEnd)
+        if (_isGameEnd || IsEndGame()) // プレイヤーが死ぬか一定時間たつと
         {
             GameOver();
         }
@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("ゲームオーバー");
+        // --------------------------- プレイヤーの情報を受け取る ---------------------------
+        var player = _player.gameObject.GetComponent<PlayerController>();
+        mPlayerMoveLength = player.mRunLength;
     }
 
     public bool IsEndGame()    // ゲーム終了フラグ
