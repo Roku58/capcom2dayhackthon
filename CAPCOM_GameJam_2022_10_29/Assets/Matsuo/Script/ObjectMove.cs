@@ -57,7 +57,7 @@ public class ObjectMove : MonoBehaviour
         {
 
             var player = other.gameObject.GetComponent<PlayerController>();
-            int playerLevl = player.CurrentLv;
+            int playerLevl = player.mCurrentLv;
 
             if (_level <= playerLevl)
             {
