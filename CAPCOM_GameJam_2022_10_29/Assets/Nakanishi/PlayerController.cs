@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     // ----------------------------------- 定数(この値は調整に含まない) ----------------------------------
     private const int LaneWidth = 2; //　レーンの幅
-    private int mMaxLaneCounts = 4; // 最大レーン数
-    private float mPosY = 0.5f;     // 地面の高さ
+    private const int mMaxLaneCounts = 4; // 最大レーン数
+    private const float mPosY = 0.5f;     // 地面の高さ
+    private const int mGameOverPos = -5;  //　ゲームオーバーになる位置
     // ----------------------------------- 変数 ----------------------------------
     private int mCurrentExp = 0; // 現在の経験値
     public int mCurrentLv { get; private set; } // 現在のレベル
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private int mCurrentLane = 0; // 現在のレーン
     private int mPreLane=0; // ひとつ前のレーン
     private float mLaneThreshold = 0;// 線形補間の割合
+    private float mCurrentSpeed = 0; // プレイヤーの移動速度
+
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
     [SerializeField] private int mMaxExpAddition = 3; // レベルアップごとの経験値の上昇幅
@@ -36,13 +39,13 @@ void Start()
     // Update is called once per frame
     void Update()
     {
-        InputMove(); // 入力受付
-        UpdateMove(); // 位置更新
+        InputMoveHorizontal(); // 入力受付
+        UpdateMoveHorizontal(); // 位置更新
 
     }
 
 
-    void InputMove() // 操作に応じて位置を変更する
+    void InputMoveHorizontal() // 操作に応じて位置を変更する
     {
         // キーボードから入力を受け取る
         var inputX= Input.GetAxisRaw("Horizontal"); // 左右入力を取得する
@@ -65,7 +68,13 @@ void Start()
         mCurrentLane = Math.Clamp(mCurrentLane, 0, mMaxLaneCounts - 1);
     }
 
-    void UpdateMove() //　レーンの番号から移動する関数
+    void MoveVertical() // 体力に応じて縦に移動する
+    {
+        // 現在の体力に応じて位置を更新する
+        
+    }
+
+    void UpdateMoveHorizontal() //　レーンの番号から移動する関数
     {
         // レーンの始点
         var minLanePoint = 1 + -(mMaxLaneCounts);
@@ -99,4 +108,15 @@ void Start()
             mMaxExp += mMaxExpAddition; // 最大経験値を加算する
         }
     }
+
+
+    // -------------------------------- 当たり判定の関数 -------------------------------
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            _isDeath = true;
+        }
+    }
+
 }
