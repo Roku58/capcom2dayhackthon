@@ -16,4 +16,10 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    void GameOver()
+    {
+
+    }
+
 }
