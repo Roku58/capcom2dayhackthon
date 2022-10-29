@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private const float mPosY = 0.5f;     // 地面の高さ
     private const int mGameOverPos = -5;  //　ゲームオーバーになる位置
     private const float mMaxInvTime = 1.0f;  //　ゲームオーバーになる位置
-
+    
     // ----------------------------------- 変数 ----------------------------------
     private int mCurrentExp = 0; // 現在の経験値
     public int mCurrentLv { get; private set; } // 現在のレベル
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float mLaneThreshold = 0;// 線形補間の割合
     public float mCurrentSpeed { get; private set; } // プレイヤーの移動速度
     public bool _isDeath { get; private set; } // 生存判定
-
+    public float mRunLength { get; private set; } // 移動距離
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int mMaxHp = 3;    // 最大HP
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
     [SerializeField] private float mBaseSpeed = 10.0f; // 基本の移動速度
-    [SerializeField] private float mAcceleration = 10.0f; // 加速度
+    [SerializeField] private float mSpeed = 10.0f; // 加速度
     
 
     // Start is called before the first frame update
@@ -51,9 +51,7 @@ public class PlayerController : MonoBehaviour
         UpdateMoveHorizontal(); // 位置更新
 
         MoveVertical(); // 縦に移動する
-
-        // 移動速度を更新する
-        UpdateSpeed();
+        UpdateSpeed(); // 移動速度を更新する
     }
 
 
@@ -102,11 +100,14 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
 
-    void UpdateSpeed()
+    void UpdateSpeed() // スピードと距離を加算する
     {
         // 速度を更新する
-        mCurrentSpeed += Time.deltaTime * mAcceleration;
+        mCurrentSpeed += Time.deltaTime * mSpeed;
+        // 距離を加算
+        mRunLength += mCurrentSpeed * Time.deltaTime;
     }
+
 
     // ----------------------------- 外部から呼び出してもらう関数 ----------------------------
     public void Damaged(int Damage_) // ダメージを受ける関数
