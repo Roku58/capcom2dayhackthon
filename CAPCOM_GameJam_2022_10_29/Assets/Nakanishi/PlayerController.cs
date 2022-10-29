@@ -19,18 +19,20 @@ public class PlayerController : MonoBehaviour
     private int mCurrentLane = 0; // 現在のレーン
     private int mPreLane=0; // ひとつ前のレーン
     private float mLaneThreshold = 0;// 線形補間の割合
-    private float mCurrentSpeed = 0; // プレイヤーの移動速度
-    private float mInvTime = 0.0f; // 無敵時間
-    private float mVerticalMoveThreshold = 1.0f; // 縦移動の線形補間の移動値
+    public float mCurrentSpeed { get; private set; } // プレイヤーの移動速度
     public bool _isDeath { get; private set; } // 生存判定
+
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
     [SerializeField] private int mMaxExpAddition = 3; // レベルアップごとの経験値の上昇幅
     [SerializeField] private int mMaxHp = 3;    // 最大HP
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
+    [SerializeField] private float mBaseSpeed = 10.0f; // 基本の移動速度
+    [SerializeField] private float mAcceleration = 10.0f; // 加速度
+    
 
-// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         // ------------------------------- 変数を初期化 ------------------------------
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
         mHp = mMaxHp; // 体力を初期化
         mCurrentLane = 0;
         mLaneThreshold = 1.0f; // 補間終了状態にしておく
-        mVerticalMoveThreshold = 1.0f; // 補間終了状態にしておく
+        mCurrentSpeed = mBaseSpeed;
     }
 
     // Update is called once per frame
@@ -49,13 +51,15 @@ public class PlayerController : MonoBehaviour
         UpdateMoveHorizontal(); // 位置更新
 
         MoveVertical(); // 縦に移動する
+
+        // 移動速度を更新する
+        UpdateSpeed();
     }
 
 
     void InputMoveHorizontal() // 操作に応じて位置を変更する
     {
         // キーボードから入力を受け取る
-        var inputX= Input.GetAxisRaw("Horizontal"); // 左右入力を取得する
         if (mLaneThreshold >= 1.0f)　// 移動完了
         {
             if (Input.GetKeyDown(KeyCode.D)) // 右入力
@@ -78,12 +82,6 @@ public class PlayerController : MonoBehaviour
     void MoveVertical() // 体力に応じて縦に移動する
     {
         // 現在の体力に応じて位置を更新する
-
-        if (mVerticalMoveThreshold >= 1.0f)
-        {
-
-        }
-
         var posZ = mGameOverPos + mHp;
         transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
     }
@@ -104,14 +102,19 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
 
+    void UpdateSpeed()
+    {
+        // 速度を更新する
+        mCurrentSpeed += Time.deltaTime * mAcceleration;
+    }
+
     // ----------------------------- 外部から呼び出してもらう関数 ----------------------------
     public void Damaged(int Damage_) // ダメージを受ける関数
     {
         mHp -= Damage_; // 体力を減らす
 
-        // 補間率を初期化する
-        mVerticalMoveThreshold = 0.0f;
-
+        // 速度を下げる
+        mCurrentSpeed = mBaseSpeed;
     }
 
     public void GetResource(int Exp_) // 資源を取得する関数(引数 加算する経験値)
@@ -136,7 +139,4 @@ public class PlayerController : MonoBehaviour
             _isDeath = true;
         }
     }
-
-    
-
 }
