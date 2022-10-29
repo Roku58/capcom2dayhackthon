@@ -21,7 +21,7 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0.2584905, g: 0.9943505, b: 1, a: 1}
+    value: {r: 0, g: 0.9900918, b: 1, a: 1}
   center:
     overrideState: 1
     value: {x: 0.5, y: 0.5}
@@ -32,8 +32,8 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   roundness:
-    overrideState: 0
-    value: 0.77
+    overrideState: 1
+    value: 1
   rounded:
     overrideState: 0
     value: 0
@@ -83,16 +83,16 @@ MonoBehaviour:
     value: 0.5
   softKnee:
     overrideState: 1
-    value: 0.5
+    value: 0.528
   clamp:
     overrideState: 0
     value: 65472
   diffusion:
-    overrideState: 0
-    value: 7
+    overrideState: 1
+    value: 10
   anamorphicRatio:
     overrideState: 0
-    value: 0
+    value: 1
   color:
     overrideState: 0
     value: {r: 1, g: 1, b: 1, a: 1}
@@ -105,4 +105,4 @@ MonoBehaviour:
     defaultState: 1
   dirtIntensity:
     overrideState: 0
-    value: 0
+    value: 1
