@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
 
         MoveVertical(); // 縦に移動する
         UpdateSpeed(); // 移動速度を更新する
+
+        // ゲーム終了フラグを取得したら距離を記録する
+        
     }
 
 
@@ -133,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
 
     // -------------------------------- 当たり判定の関数 -------------------------------
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Wall")
         {
