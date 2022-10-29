@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // ----------------------------------- 定数(この値は調整に含まない) ----------------------------------
     private const int LaneWidth = 2; //　レーンの幅
-    private int mMaxLaneCounts = 3; // 最大レーン数
+    private int mMaxLaneCounts = 4; // 最大レーン数
     private float mPosY = 0.5f;     // 地面の高さ
     // ----------------------------------- 変数 ----------------------------------
     private int mCurrentExp = 0; // 現在の経験値
@@ -54,12 +54,14 @@ void Start()
             mCurrentLane--;
         }
         // 現在のレーンがレーンの最大値を超えたら矯正する
-        mCurrentLane = Math.Clamp(mCurrentLane, 0, mMaxLaneCounts);
+        mCurrentLane = Math.Clamp(mCurrentLane, 0, mMaxLaneCounts - 1);
     }
 
     void UpdateMove() //　レーンの番号から移動する関数
     {
-        var posX = mCurrentLane * LaneWidth;  // X座標を算出
+        // レーンの始点
+        var minLanePoint = 1 + -(mMaxLaneCounts);
+        var posX = minLanePoint + (mCurrentLane * LaneWidth);  // X座標を算出
         transform.position = new Vector3(posX, mPosY, 0.0f);
     }
 
