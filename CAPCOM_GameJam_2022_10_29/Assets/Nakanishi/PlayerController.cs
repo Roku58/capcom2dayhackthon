@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private const int mMaxLaneCounts = 4; // 最大レーン数
     private const float mPosY = 0.5f;     // 地面の高さ
     private const int mGameOverPos = -5;  //　ゲームオーバーになる位置
+    private const float mMaxInvTime = 1.0f;  //　ゲームオーバーになる位置
+
     // ----------------------------------- 変数 ----------------------------------
     private int mCurrentExp = 0; // 現在の経験値
     public int mCurrentLv { get; private set; } // 現在のレベル
@@ -18,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private int mPreLane=0; // ひとつ前のレーン
     private float mLaneThreshold = 0;// 線形補間の割合
     private float mCurrentSpeed = 0; // プレイヤーの移動速度
+    private float mInvTime = 0.0f; // 無敵時間
+    private float mVerticalMoveThreshold = 1.0f; // 縦移動の線形補間の移動値
+    public bool _isDeath { get; private set; } // 生存判定
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
@@ -26,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
 
 // Start is called before the first frame update
-void Start()
+    void Start()
     {
         // ------------------------------- 変数を初期化 ------------------------------
         mCurrentExp = 0;
@@ -34,6 +39,7 @@ void Start()
         mHp = mMaxHp; // 体力を初期化
         mCurrentLane = 0;
         mLaneThreshold = 1.0f; // 補間終了状態にしておく
+        mVerticalMoveThreshold = 1.0f; // 補間終了状態にしておく
     }
 
     // Update is called once per frame
@@ -42,6 +48,7 @@ void Start()
         InputMoveHorizontal(); // 入力受付
         UpdateMoveHorizontal(); // 位置更新
 
+        MoveVertical(); // 縦に移動する
     }
 
 
@@ -71,7 +78,14 @@ void Start()
     void MoveVertical() // 体力に応じて縦に移動する
     {
         // 現在の体力に応じて位置を更新する
-        
+
+        if (mVerticalMoveThreshold >= 1.0f)
+        {
+
+        }
+
+        var posZ = mGameOverPos + mHp;
+        transform.position = new Vector3(transform.position.x, transform.position.y, posZ);
     }
 
     void UpdateMoveHorizontal() //　レーンの番号から移動する関数
@@ -94,6 +108,10 @@ void Start()
     public void Damaged(int Damage_) // ダメージを受ける関数
     {
         mHp -= Damage_; // 体力を減らす
+
+        // 補間率を初期化する
+        mVerticalMoveThreshold = 0.0f;
+
     }
 
     public void GetResource(int Exp_) // 資源を取得する関数(引数 加算する経験値)
@@ -115,8 +133,10 @@ void Start()
     {
         if (collision.gameObject.tag == "Wall")
         {
-            //_isDeath = true;
+            _isDeath = true;
         }
     }
+
+    
 
 }
