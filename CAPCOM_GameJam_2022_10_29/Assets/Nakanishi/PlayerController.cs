@@ -6,30 +6,30 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // ----------------------------------- 定数(この値は調整に含まない) ----------------------------------
-    private const int LaneWidth = 2; //　レーンの幅
-    private const int mMaxLaneCounts = 4; // 最大レーン数
-    private const float mPosY = 0.5f;     // 地面の高さ
-    private const int mGameOverPos = -5;  //　ゲームオーバーになる位置
+    private const int LaneWidth = 2;         //　レーンの幅
+    private const int mMaxLaneCounts = 4;    // 最大レーン数
+    private const float mPosY = 0.5f;        // 地面の高さ
+    private const int mGameOverPos = -5;     //　ゲームオーバーになる位置
     private const float mMaxInvTime = 1.0f;  //　ゲームオーバーになる位置
     
     // ----------------------------------- 変数 ----------------------------------
-    private int mCurrentExp = 0; // 現在の経験値
-    public int mCurrentLv { get; private set; } // 現在のレベル
-    private int mHp = 0;
-    private int mCurrentLane = 0; // 現在のレーン
-    private int mPreLane=0; // ひとつ前のレーン
-    private float mLaneThreshold = 0;// 線形補間の割合
+    private int mCurrentExp = 0;                     // 現在の経験値
+    public int mCurrentLv { get; private set; }      // 現在のレベル
+    private int mHp = 0;                             // 現在の体力
+    private int mCurrentLane = 0;                    // 現在のレーン
+    private int mPreLane=0;                          // ひとつ前のレーン
+    private float mLaneThreshold = 0;                // 線形補間の割合
     public float mCurrentSpeed { get; private set; } // プレイヤーの移動速度
-    public bool _isDeath { get; private set; } // 生存判定
-    public float mRunLength { get; private set; } // 移動距離
+    public bool _isDeath { get; private set; }       // 生存判定
+    public float mRunLength { get; private set; }    // 移動距離
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
-    [SerializeField] private int mMaxExpAddition = 3; // レベルアップごとの経験値の上昇幅
-    [SerializeField] private int mMaxHp = 3;    // 最大HP
+    [SerializeField] private int mMaxExpAddition = 3;           // レベルアップごとの経験値の上昇幅
+    [SerializeField] private int mMaxHp = 3;                    // 最大HP
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
-    [SerializeField] private float mBaseSpeed = 10.0f; // 基本の移動速度
-    [SerializeField] private float mSpeed = 10.0f; // 加速度
+    [SerializeField] private float mBaseSpeed = 10.0f;          // 基本の移動速度
+    [SerializeField] private float mSpeed = 10.0f;              // 加速度
     
 
     // Start is called before the first frame update
