@@ -36,13 +36,13 @@ public class ObjectMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-    }
-
-    private void Update()
-    {
         Move();
     }
+
+    //private void Update()
+    //{
+    //    //Move();
+    //}
 
     /// <summary>
     /// オブジェクトの移動処理
@@ -81,6 +81,8 @@ public class ObjectMove : MonoBehaviour
                 Debug.Log("ダメージ");
                 player.Damaged(_damage);
                 StartCoroutine(ScreenDamageEffect());
+
+                Destroy(gameObject);
             }
         }
     }
