@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
+using TMPro;
 
 /// <summary>
 /// 資源の移動とプレイヤーとの衝突のクラス
@@ -27,8 +28,12 @@ public class ObjectMove : MonoBehaviour
 
     GlitchFx _glitchFx;
 
+    [SerializeField]
+    TextMeshProUGUI  _levelText;
+
     void Start()
     {
+        _levelText.text = ($"Lv:{_level}");
         _impulseSource = GetComponent<CinemachineImpulseSource>();
         _glitchFx = GameObject.Find("Main Camera").GetComponent<GlitchFx>();
         _glitchFx.Intensity = 0;
@@ -85,6 +90,11 @@ public class ObjectMove : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        else if (other.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+
+        }
     }
 
     IEnumerator ScreenDamageEffect()
@@ -93,10 +103,10 @@ public class ObjectMove : MonoBehaviour
         //_glitchFx.Intensity = 0;
 
         // 何秒かかるか
-        float duration = 1f;
+        float duration = 0.3f;
 
         // 最終値変化量
-        float endValue = 1;
+        float endValue = 0.3f;
 
         // 現在の値（変化する値）
         float currentValue = 0;
