@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 1
   _exp: 10
-  _moveSpeed: 100
+  _moveSpeed: 10
   _damage: 1
   _impulseSource: {fileID: 0}
 --- !u!114 &7988303283967010005
