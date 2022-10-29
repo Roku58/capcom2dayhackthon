@@ -42,13 +42,13 @@ public class ObjectMove : MonoBehaviour
 
     }
 
-    
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if (other.gameObject.GetComponent<PlayerController>())
         {
-
+            Debug.Log("É_ÉÅÅ[ÉW");
             var player = GetComponent<PlayerController>();
             if (_level <= player.mCurrentLv)
             {
