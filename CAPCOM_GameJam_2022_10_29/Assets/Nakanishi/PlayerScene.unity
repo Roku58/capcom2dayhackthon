@@ -866,6 +866,7 @@ GameObject:
   - component: {fileID: 2125881202}
   - component: {fileID: 2125881201}
   - component: {fileID: 2125881200}
+  - component: {fileID: 2125881203}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -939,6 +940,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.917, y: 0, z: 0}
+--- !u!114 &2125881203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125881199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1706284f9bbbb4e199374db583725bba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intensity: 1
+  shader: {fileID: 4800000, guid: de782114409bf409495896cc089fbf82, type: 3}
 --- !u!1001 &449060055548165891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -946,6 +961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 449060054822264776, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
+      propertyPath: mSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 449060054822264776, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
       propertyPath: mHorizontalMoveSpeed
       value: 20
