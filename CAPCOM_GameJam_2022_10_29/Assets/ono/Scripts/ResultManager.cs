@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ResultManager : MonoBehaviour
     public List<GameObject> not_opens = new List<GameObject>();
     public List<GameObject> opens = new List<GameObject>();
 
-    private float length = 200;
+    private float length = 850;
     private int lv = 1;
 
     [SerializeField] int split = 100;
@@ -26,6 +27,7 @@ public class ResultManager : MonoBehaviour
         SetList();
         CheckLength();
         SetText();
+        Animation();
     }
 
     //子要素の取得とリストに格納
@@ -69,6 +71,24 @@ public class ResultManager : MonoBehaviour
     public void SetText()
     {
         lv_text.text = lv.ToString();
-        length_text.text = length.ToString()+"m²";
+        length_text.text = "0m²";
+    }
+
+    public void Animation()
+    {
+        float pos = -40.0f;
+
+        int num = (int)(length / (split));
+
+        pos += num * 5.0f + 10.0f;
+
+        Camera.main.transform.position = new Vector3(-50.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+        Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), 2.0f).SetDelay(1.0f);
+
+        DOVirtual.Float(0f, length, 2.0f, value =>
+        {
+            length_text.text = value.ToString("f0")+"m²";
+        }).SetDelay(1.0f);
+
     }
 }
