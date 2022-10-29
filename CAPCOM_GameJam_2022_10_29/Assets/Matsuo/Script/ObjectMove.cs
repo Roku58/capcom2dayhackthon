@@ -10,6 +10,8 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     int _level;
     [SerializeField]
+    int _exp;
+    [SerializeField]
     float _moveSpeed;
 
     void Start()
@@ -38,14 +40,18 @@ public class ObjectMove : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collider.gameObject.GetComponent<Player>())
-        //{
-        //    playerLevel = GetComponent<Player>().
-        //    if(_revel <= playerLevel)
-        //    {
+        if (collision.gameObject.GetComponent<PlayerController>())
+        {
+            //var playerLevel = GetComponent<Player>().;
+            //if (_level <= playerLevel)
+            //{
 
-        //        Destroy(gameObject);
-        //    }
-        //}
+            //    Destroy(gameObject);
+            //}
+            //else
+            //{
+
+            //}
+        }
     }
 }
