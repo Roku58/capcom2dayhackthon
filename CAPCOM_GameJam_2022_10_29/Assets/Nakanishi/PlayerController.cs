@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     private const int mMaxLaneCounts = 4;    // 最大レーン数
     private const float mPosY = 0.5f;        // 地面の高さ
     private const int mGameOverPos = -5;     //　ゲームオーバーになる位置
-    private const float mMaxInvTime = 1.0f;  //　ゲームオーバーになる位置
-    
+
     // ----------------------------------- 変数 ----------------------------------
     private int mCurrentExp = 0;                     // 現在の経験値
     public int mCurrentLv { get; private set; }      // 現在のレベル
@@ -23,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public float mCurrentSpeed { get; private set; } // プレイヤーの移動速度
     public bool _isDeath { get; private set; }       // 生存判定
     public float mRunLength { get; private set; }    // 移動距離
+    private bool mIsChargeFiver = false;   // フィーバーゲージを加算できる状態にあるかどうか  
+    private float mFiverGauge = 0.0f; // フィーバーゲージの量
+    private bool mIsFiver=false; // フィーバー中かどうか
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
@@ -31,8 +33,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
     [SerializeField] private float mBaseSpeed = 10.0f;          // 基本の移動速度
     [SerializeField] private float mSpeed = 10.0f;              // 加速度
-    
-
+    [SerializeField] private const float mMaxSpeed = 50.0f;  //　最大速度
+    [SerializeField] private float mFiverGaugeSpeed = 10.0f; // フィーバーゲージの上昇量
+    [SerializeField] private float mMaxFiverGauge = 100.0f; // フィーバーゲージの最大値
+    [SerializeField] private float mFiverGaugeReduceSpeed = 20.0f; // フィーバーゲージが減る量
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +46,8 @@ public class PlayerController : MonoBehaviour
         mHp = mMaxHp; // 体力を初期化
         mCurrentLane = 0;
         mLaneThreshold = 1.0f; // 補間終了状態にしておく
-        mCurrentSpeed = mBaseSpeed;
+        mCurrentSpeed = mBaseSpeed; // 速度を初期化
+        mFiverGauge = 0.0f;     // ゲージを初期化
     }
 
     // Update is called once per frame
@@ -53,9 +58,8 @@ public class PlayerController : MonoBehaviour
 
         MoveVertical(); // 縦に移動する
         UpdateSpeed(); // 移動速度を更新する
+        UpdateFiver(); // フィーバーを更新する
 
-        // ゲーム終了フラグを取得したら距離を記録する
-        
     }
 
 
@@ -106,18 +110,46 @@ public class PlayerController : MonoBehaviour
     {
         // 速度を更新する
         mCurrentSpeed += Time.deltaTime * mSpeed;
+        // 速度をクランプする
+        if (mCurrentSpeed >= mMaxSpeed)
+        {
+            mCurrentSpeed = mMaxSpeed;
+            mIsChargeFiver = true; // フィーバーゲージをかさんするかどうか
+        }
+        else // 最大速度
+        {
+            mIsChargeFiver = false;
+        }
         // 距離を加算
         mRunLength += mCurrentSpeed * Time.deltaTime;
     }
 
+    void UpdateFiver() // フィーバーゲージを更新する
+    {
+
+        if (!mIsFiver) // フィーバー時以外の処理
+        {
+            if (!mIsChargeFiver)
+            {
+                return;
+            }
+
+            // フィーバーゲージを加算する
+            mFiverGauge += Time.deltaTime * mFiverGaugeSpeed;
+
+            // ゲージが最大値を超えたらフィーバーに突入する
+            if (mFiverGauge >= mMaxFiverGauge)
+            {
+                mIsFiver = true;
+            }
+        }
+    }
 
     // ----------------------------- 外部から呼び出してもらう関数 ----------------------------
     public void Damaged(int Damage_) // ダメージを受ける関数
     {
         mHp -= Damage_; // 体力を減らす
-
-        // 速度を下げる
-        mCurrentSpeed = mBaseSpeed;
+        mCurrentSpeed = mBaseSpeed; // 速度を下げる
     }
 
     public void GetResource(int Exp_) // 資源を取得する関数(引数 加算する経験値)
