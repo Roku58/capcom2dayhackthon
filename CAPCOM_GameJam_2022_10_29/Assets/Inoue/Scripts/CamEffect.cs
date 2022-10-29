@@ -9,6 +9,9 @@ public class CamEffect : MonoBehaviour
     public bool feverMode;
     public PostProcessVolume PPV;
     public Vignette vignette;
+    private float t;
+    public float Intensity;
+    public float Speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +24,9 @@ public class CamEffect : MonoBehaviour
     {
         if (feverMode)
         {
+            t += Time.deltaTime*Speed;
             vignette.enabled.Override(true);
-            vignette.intensity.Override(Mathf.MoveTowards(vignette.intensity.value, 1, Time.deltaTime));
+            vignette.intensity.Override(Mathf.Abs(Mathf.Sin(t))*Intensity);
         }
         else
         {
