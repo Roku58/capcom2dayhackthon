@@ -16,7 +16,10 @@ public class ResultManager : MonoBehaviour
     private float length = 850;
     private int lv = 1;
 
-    [SerializeField] int split = 100;
+    [SerializeField] int split = 100, land_max = 50;
+
+    [SerializeField] GameObject open_pref, not_open_pref;
+
 
     public void Awake()
     {
@@ -41,16 +44,24 @@ public class ResultManager : MonoBehaviour
 
         ParentObject = GameObject.Find("not_open");
 
-        for (int i = 0; i < ParentObject.transform.childCount; i++)
+        for (int i = 0; i < land_max; i++)
         {
-            not_opens.Add(ParentObject.transform.GetChild(i).gameObject);
+            GameObject obj = Instantiate(not_open_pref, ParentObject.transform);
+            Vector3 pos = new Vector3(-25, 0, 0);
+            pos.x += 5 * i;
+            obj.transform.localPosition = pos;
+            not_opens.Add(obj);
         }
 
         ParentObject = GameObject.Find("open");
 
-        for (int i = 0; i < ParentObject.transform.childCount; i++)
+        for (int i = 0; i < land_max; i++)
         {
-            opens.Add(ParentObject.transform.GetChild(i).gameObject);
+            GameObject obj = Instantiate(open_pref, ParentObject.transform);
+            Vector3 pos = new Vector3(-25, 0, 0);
+            pos.x += 5 * i;
+            obj.transform.localPosition = pos;
+            opens.Add(obj);
         }
     }
 
@@ -64,6 +75,7 @@ public class ResultManager : MonoBehaviour
         }
 
         int num = (int)(length  / (split));
+        if (num > land_max) num = land_max;
 
         for (int i = 0; i < num; i++)
         {
@@ -83,22 +95,23 @@ public class ResultManager : MonoBehaviour
     public void Animation()
     {
         float pos = -40.0f;
-
+        float ease_time = 3.0f, delay = 1.0f;
         int num = (int)(length / (split));
+        if (num > land_max) num = land_max;
 
         pos += num * 5.0f + 10.0f;
 
         Camera.main.transform.position = new Vector3(-50.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
-        Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), 2.0f).SetDelay(1.0f).OnComplete(() =>
+        Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), ease_time).SetDelay(delay).SetEase(Ease.OutQuint).OnComplete(() =>
         {
             ReStartButton.SetActive(true);
             TitleButton.SetActive(true);
         }); ;
 
-        DOVirtual.Float(0f, length, 2.0f, value =>
+        DOVirtual.Float(0f, length, ease_time, value =>
         {
             length_text.text = value.ToString("f0")+"m²";
-        }).SetDelay(1.0f);
+        }).SetDelay(delay).SetEase(Ease.OutQuint);
 
     }
 }
