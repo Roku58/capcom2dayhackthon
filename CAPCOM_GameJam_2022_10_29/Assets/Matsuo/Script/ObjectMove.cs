@@ -22,8 +22,6 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     int _damage;
 
-    [SerializeField]
-
     CinemachineImpulseSource _impulseSource = default;
 
     GlitchFx _glitchFx;
