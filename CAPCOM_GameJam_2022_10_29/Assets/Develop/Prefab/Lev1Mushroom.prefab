@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _level: 1
-  _exp: 10
+  _exp: 1
   _damage: 1
   _levelText: {fileID: 3716359681603255784}
 --- !u!114 &8535381149414775470
