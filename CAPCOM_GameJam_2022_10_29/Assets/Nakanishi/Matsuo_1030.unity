@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4669147e4ed9b544baaa8c7e9c659a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 7350098796531920628, guid: b1e6e0faedff65740968805c88f2f756, type: 3}
+  _player: {fileID: 449060054822264778, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
   _playerTransformPos: {fileID: 1741794732}
   _isGameEnd: 0
   mMaxGameSeconds: 60
