@@ -108,7 +108,7 @@ public class ResultManager : MonoBehaviour
             TitleButton.SetActive(true);
         });
 
-        player.transform.DOLocalMove(new Vector3(pos, -24.5f, -10), ease_time).SetDelay(delay).SetEase(Ease.OutQuint);
+        player.transform.DOLocalMove(new Vector3(pos, -23, -10), ease_time).SetDelay(delay).SetEase(Ease.OutQuint);
 
 
 
