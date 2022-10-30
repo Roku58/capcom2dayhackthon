@@ -16,7 +16,6 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     int _exp;
 
-    [SerializeField]
     float _moveSpeed;
 
     [SerializeField]
@@ -29,10 +28,16 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI  _levelText;
 
+    GameManager _gameManager;
+
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _moveSpeed = _gameManager.mPlayerSpeed;
+
         _levelText.text = ($"Lv:{_level}");
         _impulseSource = GetComponent<CinemachineImpulseSource>();
+
         _glitchFx = GameObject.Find("Main Camera").GetComponent<GlitchFx>();
         _glitchFx.Intensity = 0;
     }

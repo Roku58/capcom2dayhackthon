@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
 
         // 値をセットしたフラグを切り替えておく
         mIsSetPlayerMoveLength = true;
+        SceneManager.LoadScene("Result");
     }
 
     public bool IsEndGame()    // ゲーム終了フラグ

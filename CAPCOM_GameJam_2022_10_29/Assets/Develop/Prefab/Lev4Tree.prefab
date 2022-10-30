@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3703298812094979518}
   - component: {fileID: 8871140088147304722}
   - component: {fileID: 4601543100153392313}
+  - component: {fileID: 601788966915455624}
   m_Layer: 0
   m_Name: Lev4Tree
   m_TagString: Untagged
@@ -122,6 +123,19 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!65 &601788966915455624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043951988840637158}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.184513, y: 6.783524, z: 3.7428653}
+  m_Center: {x: -0.011622429, y: 3.3558476, z: -0.27893555}
 --- !u!1 &8178296608948291326
 GameObject:
   m_ObjectHideFlags: 0
