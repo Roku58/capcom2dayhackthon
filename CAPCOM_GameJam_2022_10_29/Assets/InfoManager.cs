@@ -5,25 +5,21 @@ using UnityEngine.UI;
 
 public class InfoManager : MonoBehaviour
 {
-    PlayerController _player;
+    public PlayerController _player;
 
-    [SerializeField] Text LV_text, HP_text, EXP_text, HPMAX_text, EXPMAX_text, SPEED_text;
+    [SerializeField] Text LV_text, EXP_text, EXPMAX_text, SPEED_text;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _player = GameObject.Find("Player(Clone)").GetComponent<PlayerController>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        if(_player == null) _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         textUpdate();
     }
 
     void textUpdate()
     {
         LV_text.text = _player.mCurrentLv.ToString();
-        SPEED_text.text = _player.mCurrentSpeed.ToString();    
+        SPEED_text.text = _player.mCurrentSpeed.ToString();
+        EXP_text.text = _player.mCurrentExp.ToString();
+        EXPMAX_text.text = _player.mMaxExp.ToString();
     }
 }
