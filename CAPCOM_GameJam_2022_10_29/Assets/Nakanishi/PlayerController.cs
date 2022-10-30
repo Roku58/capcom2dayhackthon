@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
         // レベルに応じたメッシュ表示を切り替え
         if (mMesh.Length >= mCurrentLv)
         {
-            mMesh[mCurrentLv + 1].SetActive(true);
+            mMesh[mCurrentLv - 1].SetActive(true);
         }
     }
 }
