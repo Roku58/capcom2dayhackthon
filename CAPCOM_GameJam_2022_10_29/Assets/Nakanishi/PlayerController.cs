@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject[] mMesh = new GameObject[3]; // ゲームオブジェクトの配列
     [SerializeField] private CamEffect mCamEffect;
 
+    [SerializeField] ParticleSystem particleSystem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -189,6 +191,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetResource(int Exp_) // 資源を取得する関数(引数 加算する経験値)
     {
+        particleSystem.Play();
         // 経験値を加算する
         mCurrentExp += Exp_;
         // 最大値をオーバーしたらレベルを上昇させて経験値を下げる
