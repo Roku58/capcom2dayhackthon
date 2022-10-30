@@ -1,18 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
-    // Start is called before the first frame update
+    PlayerController _playerController;
+    [SerializeField]
+    float _value;
+    [SerializeField]
+    float _a;
+    [SerializeField] Image _gauge;
+
     void Start()
     {
+
+        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if(!_playerController)
+        {
+            _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+        }
+        if( _playerController != null )
+        {
+            _value = _playerController.mMaxFiverGauge;
+            _a = _playerController.mFiverGauge;
+
+            _gauge.fillAmount = _a / _value;
+        }
+
     }
+
 }
