@@ -21,6 +21,8 @@ public class ObjectMove : MonoBehaviour
     [SerializeField]
     int _damage;
 
+
+
     CinemachineImpulseSource _impulseSource = default;
 
     GlitchFx _glitchFx;
@@ -77,11 +79,19 @@ public class ObjectMove : MonoBehaviour
             var player = other.gameObject.GetComponent<PlayerController>();
             int playerLevl = player.mCurrentLv;
 
+            if(player.mIsFiver)
+            {
+                _impulseSource.GenerateImpulse(new Vector3(0, 0, -0.5f));
+
+                player.GetResource(_exp);
+                Destroy(gameObject);
+            }
+
             if (_level <= playerLevl)
             {
                 Debug.Log("ÕŒ‚");
 
-                _impulseSource.GenerateImpulse(new Vector3(0, 0, -1));
+                _impulseSource.GenerateImpulse(new Vector3(0, 1, 0));
 
                 player.GetResource(_exp);
 
