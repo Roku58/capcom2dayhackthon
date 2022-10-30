@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     bool _isGameEnd;
+
+    [SerializeField]
+    TimeManager _timeManager;
+
+    [SerializeField]
+    ParticleSystem[] _particleSystem;
     // ----------------------------------- 変数 ----------------------------------
     static public float mPlayerMoveLength = 0.0f; // プレイヤーの移動距離 
     private float mGameSeconds = 0.0f; // ゲームのタイマー
@@ -26,12 +32,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         // -------------------------------- 初期化 --------------------------------
         mPlayerMoveLength = 0;
         mGameSeconds = 0.0f;
         _player = Instantiate(_player);
         _player.transform.position = _playerTransformPos.transform.position;
 
+        //_timeManager = _player.gameObject.GetComponent<TimeManager>();
         _controller = _player.gameObject.GetComponent<PlayerController>();
 
         mIsSetPlayerMoveLength = false; // 値をセットしたフラグを初期化する
@@ -44,7 +52,7 @@ public class GameManager : MonoBehaviour
         mPlayerSpeed = _controller.mCurrentSpeed;
 
         mGameSeconds += Time.deltaTime; // タイマーを加算
-        if (!mIsSetPlayerMoveLength &&(_isGameEnd || IsEndGame())) // プレイヤーが死ぬか一定時間たつと
+        if (!mIsSetPlayerMoveLength &&(_isGameEnd)) // プレイヤーが死ぬか一定時間たつと
         {
             GameOver();
         }
@@ -57,7 +65,13 @@ public class GameManager : MonoBehaviour
 
         // 値をセットしたフラグを切り替えておく
         mIsSetPlayerMoveLength = true;
-        SceneManager.LoadScene("Result");
+        _timeManager.SlowDown();
+        for(int i = 0; i < _particleSystem.Length; i++)
+        {
+            _particleSystem[i].Play();
+        }
+
+        //SceneManager.LoadScene("Result");
     }
 
     public bool IsEndGame()    // ゲーム終了フラグ
