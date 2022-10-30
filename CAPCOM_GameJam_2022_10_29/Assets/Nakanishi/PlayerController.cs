@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour
     public int mCurrentLv { get; private set; }      // 現在のレベル
     private int mHp = 0;                             // 現在の体力
     private int mCurrentLane = 0;                    // 現在のレーン
-    private int mPreLane=0;                          // ひとつ前のレーン
+    private int mPreLane = 0;                          // ひとつ前のレーン
     private float mLaneThreshold = 0;                // 線形補間の割合
     public float mCurrentSpeed { get; private set; } // プレイヤーの移動速度
     public bool _isDeath { get; private set; }       // 生存判定
     public float mRunLength { get; private set; }    // 移動距離
     private bool mIsChargeFiver = false;   // フィーバーゲージを加算できる状態にあるかどうか  
     private float mFiverGauge = 0.0f; // フィーバーゲージの量
-    private bool mIsFiver=false; // フィーバー中かどうか
+    private bool mIsFiver = false; // フィーバー中かどうか
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] private int mMaxExp = 0;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         mLaneThreshold += Time.deltaTime * mHorizontalMoveSpeed;
         mLaneThreshold = Math.Clamp(mLaneThreshold, 0.0f, 1.0f);
         // 線形補間で移動
-        var pos=Vector3.Lerp(new Vector3(prePosX, mPosY, 0.0f), new Vector3(posX, mPosY, 0.0f), mLaneThreshold);
+        var pos = Vector3.Lerp(new Vector3(prePosX, mPosY, 0.0f), new Vector3(posX, mPosY, 0.0f), mLaneThreshold);
 
         transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
@@ -124,25 +124,48 @@ public class PlayerController : MonoBehaviour
         mRunLength += mCurrentSpeed * Time.deltaTime;
     }
 
+    void Fiver() // フィーバー中の更新関数 
+    {
+        mFiverGauge -= Time.deltaTime * mFiverGaugeReduceSpeed;
+        // なくなったらフィーバー終わり
+        if (mFiverGauge <= 0.0f)
+        {
+            mIsFiver = false;
+            // 速度を規定値に戻す
+            mCurrentSpeed = mBaseSpeed;
+        }
+    }
+    void UnFiver()  // フィーバーでないときの更新関数
+    {
+        if (!mIsChargeFiver)
+        {
+            return;
+        }
+
+        // フィーバーゲージを加算する
+        mFiverGauge += Time.deltaTime * mFiverGaugeSpeed;
+
+        // ゲージが最大値を超えたらフィーバーに突入する
+        if (mFiverGauge >= mMaxFiverGauge)
+        {
+            mIsFiver = true;
+        }
+    }
+
+
     void UpdateFiver() // フィーバーゲージを更新する
     {
-
         if (!mIsFiver) // フィーバー時以外の処理
         {
-            if (!mIsChargeFiver)
-            {
-                return;
-            }
-
-            // フィーバーゲージを加算する
-            mFiverGauge += Time.deltaTime * mFiverGaugeSpeed;
-
-            // ゲージが最大値を超えたらフィーバーに突入する
-            if (mFiverGauge >= mMaxFiverGauge)
-            {
-                mIsFiver = true;
-            }
+            UnFiver();
         }
+        else
+        {
+            Fiver();
+        }
+
+        // フィーバーゲージをクランプする
+        mFiverGauge = Math.Clamp(mFiverGauge, 0.0f, mMaxFiverGauge);
     }
 
     // ----------------------------- 外部から呼び出してもらう関数 ----------------------------
