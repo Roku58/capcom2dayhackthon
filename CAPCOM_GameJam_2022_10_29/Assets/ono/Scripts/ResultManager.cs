@@ -97,7 +97,7 @@ public class ResultManager : MonoBehaviour
         int num = (int)(length / (split));
         if (num > land_max) num = land_max;
 
-        pos += num * 5.0f + 15.0f;
+        pos += num * 5.0f + 10.0f;
 
         ease_time += num * 0.02f;
 
