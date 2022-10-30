@@ -25,14 +25,9 @@ public class Scroll : MonoBehaviour
     }
 
     //ƒŒ[ƒ“’·‚³‚Ì‰Šúİ’è
-    public void setup(float length, float startPos)
+    public void setup(float start, float dead)
     {
-        this.startLine = length;
-        this.deadLine = -length;
-        transform.localPosition = new Vector3(transform.position.x, transform.position.y, startPos);
-        for(int i = 0; i < lanes.Count ;i++)
-        {
-            lanes[i].transform.localScale = new Vector3(lanes[i].transform.localScale.x, lanes[i].transform.localScale.y, length);
-        }
+        this.startLine = start;
+        this.deadLine = dead;
     }
 }
