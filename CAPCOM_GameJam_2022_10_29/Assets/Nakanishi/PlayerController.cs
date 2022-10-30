@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public float mRunLength { get; private set; } // 移動距離
     private bool mIsChargeFiver = false; // フィーバーゲージを加算できる状態にあるかどうか  
     private float mFiverGauge = 0.0f; // フィーバーゲージの量
-    private bool mIsFiver = false; // フィーバー中かどうか
+    public bool mIsFiver { private set; get; } // フィーバー中かどうか
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
     [SerializeField] public int mMaxExp { get; private set; }
@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour
                 mLaneThreshold = 0.0f;
             }
         }
-
         // 現在のレーンがレーンの最大値を超えたら矯正する
         mCurrentLane = Math.Clamp(mCurrentLane, 0, mMaxLaneCounts - 1);
     }
