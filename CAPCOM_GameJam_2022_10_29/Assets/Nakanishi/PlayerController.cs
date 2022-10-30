@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mMaxFiverGauge = 100.0f; // フィーバーゲージの最大値
     [SerializeField] private float mFiverGaugeReduceSpeed = 20.0f; // フィーバーゲージが減る量
     [SerializeField] private GameObject[] mMesh = new GameObject[3]; // ゲームオブジェクトの配列
-
+    [SerializeField] private CamEffect mCamEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -171,6 +171,7 @@ public class PlayerController : MonoBehaviour
             Fiver();
         }
 
+        mCamEffect.feverMode = mIsFiver;
         // フィーバーゲージをクランプする
         mFiverGauge = Math.Clamp(mFiverGauge, 0.0f, mMaxFiverGauge);
     }
