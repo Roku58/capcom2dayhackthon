@@ -53,8 +53,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: 39
-  dead: -6.5
-  lanes: []
+  dead: -13
+  lanes:
+  - {fileID: 2330009747729384210}
+  - {fileID: 5301343662049582452}
+  - {fileID: 3938421128050087023}
+  - {fileID: 1408595690421244467}
+  - {fileID: 28945519997723318}
+  - {fileID: 5782165109629420245}
+  - {fileID: 825696385049819232}
+  - {fileID: 2742453354064774243}
 --- !u!1 &2330009747729384208
 GameObject:
   m_ObjectHideFlags: 0
