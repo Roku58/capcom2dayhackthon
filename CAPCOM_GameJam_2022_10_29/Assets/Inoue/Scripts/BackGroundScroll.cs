@@ -28,7 +28,7 @@ public class BackGroundScroll : MonoBehaviour
     void Start()
     {
        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        Create();
     }
 
     // Update is called once per frame
