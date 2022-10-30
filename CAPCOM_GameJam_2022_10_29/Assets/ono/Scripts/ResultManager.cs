@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
-    [SerializeField] private Text length_text, lv_text;
+    [SerializeField] private Text length_text;
 
     public List<GameObject> not_opens = new List<GameObject>();
     public List<GameObject> opens = new List<GameObject>();
@@ -14,17 +14,15 @@ public class ResultManager : MonoBehaviour
     GameObject TitleButton, ReStartButton;
 
     private float length = 850;
-    private int lv = 1;
 
     [SerializeField] int split = 100, land_max = 50;
 
-    [SerializeField] GameObject open_pref, not_open_pref;
+    [SerializeField] GameObject open_pref, not_open_pref, player;
 
 
     public void Awake()
     {
         length_text = GameObject.Find("Area_Num_Text").GetComponent<Text>();
-        lv_text = GameObject.Find("Lv_Num_Text").GetComponent<Text>();
         TitleButton = GameObject.Find("TitleButton"); TitleButton.SetActive(false);
         ReStartButton = GameObject.Find("ReStartButton"); ReStartButton.SetActive(false);
         length = GameManager.mPlayerMoveLength;
@@ -88,7 +86,6 @@ public class ResultManager : MonoBehaviour
     //テキストの設定
     public void SetText()
     {
-        lv_text.text = lv.ToString();
         length_text.text = "0m²";
     }
 
@@ -100,16 +97,20 @@ public class ResultManager : MonoBehaviour
         int num = (int)(length / (split));
         if (num > land_max) num = land_max;
 
-        pos += num * 5.0f + 10.0f;
+        pos += num * 5.0f + 15.0f;
 
-        ease_time += num * 0.01f;
+        ease_time += num * 0.02f;
 
         Camera.main.transform.position = new Vector3(-50.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
         Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), ease_time).SetDelay(delay).SetEase(Ease.OutQuint).OnComplete(() =>
         {
             ReStartButton.SetActive(true);
             TitleButton.SetActive(true);
-        }); ;
+        });
+
+        player.transform.DOLocalMove(new Vector3(pos, -24.5f, -10), ease_time).SetDelay(delay).SetEase(Ease.OutQuint);
+
+
 
         DOVirtual.Float(0f, length, ease_time, value =>
         {
