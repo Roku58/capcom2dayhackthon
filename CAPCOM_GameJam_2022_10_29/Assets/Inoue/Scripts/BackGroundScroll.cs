@@ -15,7 +15,7 @@ public class BackGroundScroll : MonoBehaviour
     [Header("消滅時間")]
     public float DisappearTime;         //消滅時間
     [Header("GameManager(スクロールスピード取得用)")]
-    public GameManager GM;              //GameManagerのスクロールスピードを取得用
+    public GameManager _gameManager;//GameManagerのスクロールスピードを取得用
     [Header("BackGroundObjがスポーンする場所")]
     public Transform Spawn;             //BackGroundObjがスポーンする場所
     [Header("生成頻度のカウント")]
@@ -27,15 +27,16 @@ public class BackGroundScroll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         t += Time.deltaTime;
-        if(GM)
-        ScrollSpeed = GM.mPlayerSpeed;
+        if(_gameManager)
+        ScrollSpeed = _gameManager.mPlayerSpeed;
         CreateTime = objLength / ScrollSpeed;
         if (t >= CreateTime)
         {

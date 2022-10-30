@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackGroundObj: {fileID: 2330009747164629994, guid: 9053ffc5c00056d49b1d84b017b88a38, type: 3}
-  ScrollSpeed: 40
+  ScrollSpeed: 10
   ScrollVector: {x: 0, y: 0, z: 1}
   DisappearTime: 5
   GM: {fileID: 0}
