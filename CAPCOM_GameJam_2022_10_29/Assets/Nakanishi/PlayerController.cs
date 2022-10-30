@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private bool mIsFiver = false; // フィーバー中かどうか
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
-    [SerializeField] private int mMaxExp = 0;
+    [SerializeField] public int mMaxExp { get; private set; }
     [SerializeField] private int mMaxExpAddition = 3; // レベルアップごとの経験値の上昇幅
     [SerializeField] private int mMaxHp = 3; // 最大HP
     [SerializeField] private float mHorizontalMoveSpeed = 5.0f; // 横方向の移動速度
