@@ -67,7 +67,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 2
   _exp: 15
-  _moveSpeed: 10
   _damage: 1
   _levelText: {fileID: 8619649958226894402}
 --- !u!114 &1294283324650118736
@@ -134,7 +133,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5509984, z: 1}
+  m_Size: {x: 0.1, y: 1.5509984, z: 1}
   m_Center: {x: 0, y: 0.7485744, z: 0}
 --- !u!1 &6604638092400967643
 GameObject:
