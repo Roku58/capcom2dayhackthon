@@ -13,9 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     bool _isGameEnd;
     // ----------------------------------- 変数 ----------------------------------
-    public float mPlayerMoveLength = 0.0f; // プレイヤーの移動距離 
+    static public float mPlayerMoveLength = 0.0f; // プレイヤーの移動距離 
     private float mGameSeconds = 0.0f; // ゲームのタイマー
 
+    public float mPlayerSpeed {  get; private set; } // プレイヤーの速度
+    private bool mIsSetPlayerMoveLength = false; // ゲームマネージャーに値の代入が終了したかどうか
     // ----------------------------------- 定数 ----------------------------------
     [SerializeField] private float mMaxGameSeconds = 60.0f;
 
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         _player = Instantiate(_player);
         _player.transform.position = _playerTransformPos.transform.position;
 
+        mIsSetPlayerMoveLength = false; // 値をセットしたフラグを初期化する
     }
 
     void Update()
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
         _isGameEnd = _player.gameObject.GetComponent<PlayerController>()._isDeath;
 
         mGameSeconds += Time.deltaTime; // タイマーを加算
-        if (_isGameEnd || IsEndGame()) // プレイヤーが死ぬか一定時間たつと
+        if (!mIsSetPlayerMoveLength &&(_isGameEnd || IsEndGame())) // プレイヤーが死ぬか一定時間たつと
         {
             GameOver();
         }
@@ -45,6 +48,9 @@ public class GameManager : MonoBehaviour
         // --------------------------- プレイヤーの情報を受け取る ---------------------------
         var player = _player.gameObject.GetComponent<PlayerController>();
         mPlayerMoveLength = player.mRunLength;
+
+        // 値をセットしたフラグを切り替えておく
+        mIsSetPlayerMoveLength = true;
     }
 
     public bool IsEndGame()    // ゲーム終了フラグ
