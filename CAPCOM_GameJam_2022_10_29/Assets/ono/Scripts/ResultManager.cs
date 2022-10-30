@@ -99,7 +99,7 @@ public class ResultManager : MonoBehaviour
 
         pos += num * 5.0f + 10.0f;
 
-        ease_time += num * 0.02f;
+        ease_time += num * 0.05f;
 
         Camera.main.transform.position = new Vector3(-50.0f, Camera.main.transform.position.y, Camera.main.transform.position.z);
         Camera.main.transform.DOLocalMove(new Vector3(pos, -20, -20.5f), ease_time).SetDelay(delay).SetEase(Ease.OutQuint).OnComplete(() =>
