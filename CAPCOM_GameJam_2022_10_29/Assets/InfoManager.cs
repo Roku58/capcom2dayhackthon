@@ -18,7 +18,7 @@ public class InfoManager : MonoBehaviour
     void textUpdate()
     {
         LV_text.text = _player.mCurrentLv.ToString();
-        SPEED_text.text = _player.mCurrentSpeed.ToString("f1");
+        SPEED_text.text = _player.mCurrentSpeed.ToString();
         EXP_text.text = _player.mCurrentExp.ToString();
         EXPMAX_text.text = _player.mMaxExp.ToString();
     }

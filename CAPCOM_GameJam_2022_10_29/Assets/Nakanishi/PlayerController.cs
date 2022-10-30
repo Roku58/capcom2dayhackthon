@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // TODO : ここで資源が破壊される音を再生
-
+        SoundManager.Instance.PlaySE(2);
         // TODO : ここで爆発エフェクトを再生
     }
 
