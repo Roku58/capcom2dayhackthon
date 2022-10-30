@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private const int mMaxLaneCounts = 4; // 最大レーン数
     private const float mPosY = 0.5f; // 地面の高さ
     private const int mGameOverPos = -5; //　ゲームオーバーになる位置
-
+    private const int mMaxLv = 3; // 最大レベル
     // ----------------------------------- 変数 ----------------------------------
     public int mCurrentExp { get; private set; } // 現在の経験値
     public int mCurrentLv { get; private set; } // 現在のレベル
@@ -191,6 +191,8 @@ public class PlayerController : MonoBehaviour
         if (mCurrentExp >= mMaxExp)
         {
             mCurrentLv++; // レベルを加算
+            // 最大レベルでクランプ
+            mCurrentLv = Math.Clamp(mCurrentLv, 0, mMaxLv); 
             mCurrentExp -= mMaxExp; // 経験値差分の整合性をとる
             mMaxExp += mMaxExpAddition; // 最大経験値を加算する
             fChangeMesh(); //メッシュを切り替える

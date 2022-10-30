@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba41a8d7843b7c1468e202a3ae14c2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMaxExp: 0
   mMaxExpAddition: 3
   mMaxHp: 3
   mHorizontalMoveSpeed: 20
@@ -59,6 +58,7 @@ MonoBehaviour:
   - {fileID: 5218144315895614480}
   - {fileID: 4491593535285293402}
   - {fileID: 7600327359406680051}
+  mCamEffect: {fileID: 405315706565698456, guid: e718ca6d9fe8df747875c7ae264bf06a, type: 3}
 --- !u!65 &1606181068
 BoxCollider:
   m_ObjectHideFlags: 0
