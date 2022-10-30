@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject _player;
 
+    PlayerController _controller;
+
     [SerializeField]
     Transform _playerTransformPos;
 
@@ -29,12 +31,16 @@ public class GameManager : MonoBehaviour
         _player = Instantiate(_player);
         _player.transform.position = _playerTransformPos.transform.position;
 
+        _controller = _player.gameObject.GetComponent<PlayerController>();
+
         mIsSetPlayerMoveLength = false; // 値をセットしたフラグを初期化する
     }
 
     void Update()
     {
         _isGameEnd = _player.gameObject.GetComponent<PlayerController>()._isDeath;
+
+        mPlayerSpeed = _controller.mCurrentSpeed;
 
         mGameSeconds += Time.deltaTime; // タイマーを加算
         if (!mIsSetPlayerMoveLength &&(_isGameEnd || IsEndGame())) // プレイヤーが死ぬか一定時間たつと
@@ -46,8 +52,7 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         // --------------------------- プレイヤーの情報を受け取る ---------------------------
-        var player = _player.gameObject.GetComponent<PlayerController>();
-        mPlayerMoveLength = player.mRunLength;
+        mPlayerMoveLength = _controller.mRunLength;
 
         // 値をセットしたフラグを切り替えておく
         mIsSetPlayerMoveLength = true;

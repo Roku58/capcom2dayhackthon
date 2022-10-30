@@ -27,6 +27,7 @@ public class ResultManager : MonoBehaviour
         lv_text = GameObject.Find("Lv_Num_Text").GetComponent<Text>();
         TitleButton = GameObject.Find("TitleButton"); TitleButton.SetActive(false);
         ReStartButton = GameObject.Find("ReStartButton"); ReStartButton.SetActive(false);
+        length = GameManager.mPlayerMoveLength;
     }
 
     public void Start()
