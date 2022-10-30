@@ -191,8 +191,11 @@ public class PlayerController : MonoBehaviour
         {
             mCurrentLv++; // レベルを加算
             // 最大レベルでクランプ
-            mCurrentLv = Math.Clamp(mCurrentLv, 0, mMaxLv); 
-            mCurrentExp -= mMaxExp; // 経験値差分の整合性をとる
+            mCurrentLv = Math.Clamp(mCurrentLv, 0, mMaxLv);
+            if (mCurrentLv < mMaxLv)
+            {
+                mCurrentExp -= mMaxExp; // 経験値差分の整合性をとる
+            }
             mMaxExp += mMaxExpAddition; // 最大経験値を加算する
             fChangeMesh(); //メッシュを切り替える
         }
