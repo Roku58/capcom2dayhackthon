@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
     {
         mHp -= Damage_; // 体力を減らす
         mCurrentSpeed = mBaseSpeed; // 速度を下げる
+        // TODO : ここでプレイヤーがダメージを食らったサウンドを再生
     }
 
     public void GetResource(int Exp_) // 資源を取得する関数(引数 加算する経験値)
@@ -198,7 +199,13 @@ public class PlayerController : MonoBehaviour
             }
             mMaxExp += mMaxExpAddition; // 最大経験値を加算する
             fChangeMesh(); //メッシュを切り替える
+
+            // TODO : ここでレベルアップ音を再生
+
         }
+
+        // TODO : ここで資源が破壊される音を再生
+
     }
 
 
