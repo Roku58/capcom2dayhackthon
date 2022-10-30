@@ -155,7 +155,6 @@ MonoBehaviour:
   _player: {fileID: 7350098796531920628, guid: b1e6e0faedff65740968805c88f2f756, type: 3}
   _playerTransformPos: {fileID: 1741794732}
   _isGameEnd: 0
-  mPlayerMoveLength: 0
   mMaxGameSeconds: 60
 --- !u!4 &86784421
 Transform:
