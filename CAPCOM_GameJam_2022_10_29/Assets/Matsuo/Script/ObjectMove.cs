@@ -33,17 +33,20 @@ public class ObjectMove : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        _moveSpeed = _gameManager.mPlayerSpeed;
 
         _levelText.text = ($"Lv:{_level}");
         _impulseSource = GetComponent<CinemachineImpulseSource>();
 
         _glitchFx = GameObject.Find("Main Camera").GetComponent<GlitchFx>();
         _glitchFx.Intensity = 0;
+        _moveSpeed = _gameManager.mPlayerSpeed;
+
     }
 
     private void FixedUpdate()
     {
+        _moveSpeed = _gameManager.mPlayerSpeed;
+
         Move();
     }
 
