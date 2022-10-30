@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mFiverGaugeReduceSpeed = 20.0f; // フィーバーゲージが減る量
     [SerializeField] private GameObject[] mMesh = new GameObject[3]; // ゲームオブジェクトの配列
     [SerializeField] private CamEffect mCamEffect;
+    [SerializeField] private ParticleSystem Explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -207,6 +208,7 @@ public class PlayerController : MonoBehaviour
         // TODO : ここで資源が破壊される音を再生
 
         // TODO : ここで爆発エフェクトを再生
+        Explosion.Play();
     }
 
 
