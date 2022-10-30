@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool _isDeath { get; private set; } // 生存判定
     public float mRunLength { get; private set; } // 移動距離
     private bool mIsChargeFiver = false; // フィーバーゲージを加算できる状態にあるかどうか  
-    private float mFiverGauge = 0.0f; // フィーバーゲージの量
+    public float mFiverGauge { private set; get; } // フィーバーゲージの量
     public bool mIsFiver { private set; get; } // フィーバー中かどうか
 
     // ------------------------------- 調整時に設定する変数 ------------------------------
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mSpeed = 10.0f; // 加速度
     [SerializeField] private const float mMaxSpeed = 50.0f; //　最大速度
     [SerializeField] private float mFiverGaugeSpeed = 10.0f; // フィーバーゲージの上昇量
-    [SerializeField] private float mMaxFiverGauge = 100.0f; // フィーバーゲージの最大値
+    [SerializeField] public float mMaxFiverGauge { private set; get; } // フィーバーゲージの最大値
     [SerializeField] private float mFiverGaugeReduceSpeed = 20.0f; // フィーバーゲージが減る量
     [SerializeField] private GameObject[] mMesh = new GameObject[3]; // ゲームオブジェクトの配列
     [SerializeField] private CamEffect mCamEffect;
@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
         mCurrentSpeed = mBaseSpeed; // 速度を初期化
         mFiverGauge = 0.0f; // ゲージを初期化
         fChangeMesh(); //メッシュを切り替える
+        mMaxFiverGauge = 100;
+        SoundManager.Instance.PlayBGM(0);
     }
 
     // Update is called once per frame
