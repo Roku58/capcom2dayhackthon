@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//このコードはBackGroundScroll.csにより自動的にAddComponentされるので、Inspector上での実装は不要!
 public class MoveStraight : MonoBehaviour
 {
     public Vector3 MoveVector;
