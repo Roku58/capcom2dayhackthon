@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 20
   deadLine: -10
   lanes:
@@ -169,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 20
   deadLine: -10
   lanes:
@@ -226,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 15
   deadLine: -15
   lanes:
@@ -283,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 20
   deadLine: -10
   lanes:
@@ -340,7 +336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 15
   deadLine: -15
   lanes:
@@ -397,7 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 15
   deadLine: -15
   lanes:
@@ -454,7 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 15
   deadLine: -15
   lanes:
@@ -511,7 +504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc486120494ae45408bef4f196ebe6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   startLine: 15
   deadLine: -15
   lanes:
