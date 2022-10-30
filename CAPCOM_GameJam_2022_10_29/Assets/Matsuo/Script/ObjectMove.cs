@@ -59,7 +59,7 @@ public class ObjectMove : MonoBehaviour
     {
 
         Vector3 pos = transform.position;
-        pos.z -= 1f * _moveSpeed * Time.deltaTime;
+        pos.z -= 0.11f * _moveSpeed * Time.deltaTime;
         transform.position = pos;
 
     }
