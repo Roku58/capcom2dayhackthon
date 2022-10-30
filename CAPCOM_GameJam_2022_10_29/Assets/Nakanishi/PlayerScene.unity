@@ -677,24 +677,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454590552}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1606181065 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 449060054822264778, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
-  m_PrefabInstance: {fileID: 449060055548165891}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1606181068
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606181065}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1695593970
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,14 +943,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 449060054822264776, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
-      propertyPath: mSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 449060054822264776, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
-      propertyPath: mHorizontalMoveSpeed
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 449060054822264777, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1015,10 +989,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 449060054822264778, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 449060054822264778, guid: b2ef52b632afcbc4eb09c12522fb55d1, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
