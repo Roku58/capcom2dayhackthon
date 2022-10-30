@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class BackGroundScroll : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject BackGroundObj;
-    public float ScrollSpeed;
-    public Vector3 ScrollVector;
-    public float DisappearTime;
-    public GameManager GM;
-    public Transform Spawn;
-    public float t;
-    public float objLength;
-    public float CreateTime;
+    [Header("背景となるオブジェクト")]
+    public GameObject BackGroundObj;   //背景となるオブジェクト
+    [Header("スクロールのスピード(本番ではGameManagerから自動で取得します)")]
+    public float ScrollSpeed;           //スクロールのスピード(本番ではGameManagerから自動で取得します)
+    [Header("スクロールの方向")]
+    public Vector3 ScrollVector;        //スクロールの方向
+    [Header("消滅時間")]
+    public float DisappearTime;         //消滅時間
+    [Header("GameManager(スクロールスピード取得用)")]
+    public GameManager GM;              //GameManagerのスクロールスピードを取得用
+    [Header("BackGroundObjがスポーンする場所")]
+    public Transform Spawn;             //BackGroundObjがスポーンする場所
+    [Header("生成頻度のカウント")]
+    private float t;                    //生成頻度のカウント
+    [Header("Objのスクロール方向に対する物理的な長さ(実際より僅かに短く設定を推奨)")]
+    public float objLength;             //オブジェクトのスクロールスピードに対する物理的な長さ
+    [Header("生成頻度を求める変数")]
+    public float CreateTime;            //生成頻度を求める変数
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +34,8 @@ public class BackGroundScroll : MonoBehaviour
     void Update()
     {
         t += Time.deltaTime;
-        // ScrollSpeed = GM.mPlayerSpeed;
+        if(GM)
+        ScrollSpeed = GM.mPlayerSpeed;
         CreateTime = objLength / ScrollSpeed;
         if (t >= CreateTime)
         {
